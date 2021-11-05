@@ -160,4 +160,16 @@ db.books.updateOne(
 }
 )
 
+db.books.updateOne(
+    {
+        _id: 1
+    }, {
+    $push: {
+        tags: {
+          $each:   ["tg1", "tg2", "tg3"]
+        }
+    }
+}
+)
+
 
