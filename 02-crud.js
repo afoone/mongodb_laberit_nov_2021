@@ -14,15 +14,15 @@ db.books.insertMany(
             _id: 3,
             title: "El hombre en busca de su sentido",
             author: "Victor Frankl"
-        }, 
+        },
         {
             _id: 4,
             title: "El que sea",
             author: "yo"
-        }, 
+        },
     ], {
-        ordered: false
-    }
+    ordered: false
+}
 )
 
 db.books.deleteOne(
@@ -50,10 +50,10 @@ db.books.replaceOne(
     libro
 )
 
-db.movies.updateMany({}, 
-     {
-     $set: { year: 1984}
-     }
+db.movies.updateMany({},
+    {
+        $set: { year: 1984 }
+    }
 )
 
 db.books.updateMany(
@@ -95,7 +95,7 @@ libros.map(
 libros = libros.map(
     libro => {
         return {
-            ...libro,
+            libro,
             author: {
                 nombre: libro.author.split(" ")[0],
                 apellido: libro.author.split(" ")[1]
@@ -148,6 +148,16 @@ db.books.updateOne(
             tags: ["budismo", "literatura", "nobel"]
         }
     }
+)
+
+db.books.updateOne(
+    {
+        _id: 1
+    }, {
+    $push: {
+        tags: "nuevo tag"
+    }
+}
 )
 
 
