@@ -229,3 +229,102 @@ db.books.updateOne(
 )
 
 
+db.books.updateOne(
+    {
+        _id: 1
+    }, {
+    $push: {
+        ratings: {
+          $each:   [
+              {
+                user: "user10",
+                rating: 5
+              },
+              {
+                user: "user11",
+                rating: 1
+              },
+              {
+                user: "user12",
+                rating: 6
+              },
+          ],
+          $slice: 3,
+          $sort: {"rating": -1}
+        }
+    }
+}
+)
+
+// sets
+db.books.updateOne(
+    {
+        _id: 2
+    }, {
+    $addToSet: {
+        tags: {
+          $each:   ["tg1", "tg2", "tg3"],
+        }
+    }
+}
+)
+
+// remove elements pop
+db.books.updateOne(
+    {
+        _id: 2
+    }, {
+    $pop: {
+        tags: 1
+    }
+}
+)
+
+// remove elements pull
+db.books.updateOne(
+    {
+        _id: 2
+    }, {
+    $pull: {
+        tags: "tg3"
+    }
+}
+)
+
+for (let i = 0; i<=10; i++) {
+    db.books.updateOne(
+        {
+            _id: 2
+        }, {
+        $push: {
+            tags: "tg"+i
+        }
+    }
+    )
+}
+
+db.books.updateOne(
+    {
+        _id: 2
+    },
+    {
+        $set: {
+            "tags.0": "primero"
+        }
+    }
+)
+
+db.views.updateOne(
+    {
+        url: "/blog"
+    },
+    {
+        $inc: {views: 1}
+    },
+    {
+        upsert: true
+    }
+)
+
+
+
