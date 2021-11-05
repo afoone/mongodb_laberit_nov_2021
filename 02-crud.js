@@ -128,4 +128,26 @@ db.books.updateOne(
     }
 )
 
+db.books.updateOne(
+    {
+        _id: 2
+    },
+    {
+        $inc: {
+            counter: -1
+        }
+    }
+)
+
+db.books.updateOne(
+    {
+        _id: 1
+    },
+    {
+        $set: {
+            tags: ["budismo", "literatura", "nobel"]
+        }
+    }
+)
+
 
