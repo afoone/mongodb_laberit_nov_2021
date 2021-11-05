@@ -172,4 +172,60 @@ db.books.updateOne(
 }
 )
 
+db.books.updateOne(
+    {
+        _id: 1
+    }, {
+    $push: {
+        tags: {
+          $each:   ["tgx", "tgy", "tgz"],
+          $slice: 10
+        }
+    }
+}
+)
+
+
+db.books.updateOne(
+    {
+        _id: 1
+    }, {
+    $push: {
+        ratings: {
+          $each:   [
+              {
+                user: "user1",
+                rating: 3
+              },
+              {
+                user: "user2",
+                rating: 1
+              },
+              {
+                user: "user3",
+                rating: 6
+              },
+              {
+                user: "user4",
+                rating: 7
+              },
+              {
+                user: "user5",
+                rating: 9
+              },
+              {
+                user: "user6",
+                rating: 6
+              },
+              {
+                user: "user7",
+                rating: 3
+              },
+          ],
+          $slice: 10
+        }
+    }
+}
+)
+
 
