@@ -166,7 +166,7 @@ db.books.updateOne(
     }, {
     $push: {
         tags: {
-          $each:   ["tg1", "tg2", "tg3"]
+            $each: ["tg1", "tg2", "tg3"]
         }
     }
 }
@@ -178,8 +178,8 @@ db.books.updateOne(
     }, {
     $push: {
         tags: {
-          $each:   ["tgx", "tgy", "tgz"],
-          $slice: 10
+            $each: ["tgx", "tgy", "tgz"],
+            $slice: 10
         }
     }
 }
@@ -192,37 +192,37 @@ db.books.updateOne(
     }, {
     $push: {
         ratings: {
-          $each:   [
-              {
-                user: "user1",
-                rating: 3
-              },
-              {
-                user: "user2",
-                rating: 1
-              },
-              {
-                user: "user3",
-                rating: 6
-              },
-              {
-                user: "user4",
-                rating: 7
-              },
-              {
-                user: "user5",
-                rating: 9
-              },
-              {
-                user: "user6",
-                rating: 6
-              },
-              {
-                user: "user7",
-                rating: 3
-              },
-          ],
-          $slice: 10
+            $each: [
+                {
+                    user: "user1",
+                    rating: 3
+                },
+                {
+                    user: "user2",
+                    rating: 1
+                },
+                {
+                    user: "user3",
+                    rating: 6
+                },
+                {
+                    user: "user4",
+                    rating: 7
+                },
+                {
+                    user: "user5",
+                    rating: 9
+                },
+                {
+                    user: "user6",
+                    rating: 6
+                },
+                {
+                    user: "user7",
+                    rating: 3
+                },
+            ],
+            $slice: 10
         }
     }
 }
@@ -235,22 +235,22 @@ db.books.updateOne(
     }, {
     $push: {
         ratings: {
-          $each:   [
-              {
-                user: "user10",
-                rating: 5
-              },
-              {
-                user: "user11",
-                rating: 1
-              },
-              {
-                user: "user12",
-                rating: 6
-              },
-          ],
-          $slice: 3,
-          $sort: {"rating": -1}
+            $each: [
+                {
+                    user: "user10",
+                    rating: 5
+                },
+                {
+                    user: "user11",
+                    rating: 1
+                },
+                {
+                    user: "user12",
+                    rating: 6
+                },
+            ],
+            $slice: 3,
+            $sort: { "rating": -1 }
         }
     }
 }
@@ -263,7 +263,7 @@ db.books.updateOne(
     }, {
     $addToSet: {
         tags: {
-          $each:   ["tg1", "tg2", "tg3"],
+            $each: ["tg1", "tg2", "tg3"],
         }
     }
 }
@@ -291,13 +291,13 @@ db.books.updateOne(
 }
 )
 
-for (let i = 0; i<=10; i++) {
+for (let i = 0; i <= 10; i++) {
     db.books.updateOne(
         {
             _id: 2
         }, {
         $push: {
-            tags: "tg"+i
+            tags: "tg" + i
         }
     }
     )
@@ -319,12 +319,62 @@ db.views.updateOne(
         url: "/blog"
     },
     {
-        $inc: {views: 1}
+        $inc: { views: 1 }
     },
     {
         upsert: true
     }
 )
+
+db.servers.insertMany(
+    [
+        {
+            _id: 1,
+            estado: "OFF",
+            prioridad: 5
+        },
+        {
+            _id: 2,
+            estado: "OFF",
+            prioridad: 3
+        },
+        {
+            _id: 3,
+            estado: "OFF",
+            prioridad: 1
+        }
+    ]
+)
+
+db.servers.findOneAndUpdate(
+    {
+        estado: "OFF"
+    },
+    {
+        $set: {
+            estado: "ON"
+        }
+    }
+)
+
+db.servers.findOneAndUpdate(
+    {
+        estado: "OFF"
+    },
+    {
+        $set: {
+            estado: "ON"
+        },
+    }, {
+    $sort: {
+        prioridad: -1
+    },
+    returnNewDocument: true
+}
+)
+
+
+
 
 
 
