@@ -348,3 +348,14 @@ db.x.find({
     }
 }
 )
+
+db.x.find({
+    x: {
+       $elemMatch: {
+        $gt: 10,
+        $lt: 20
+       }
+    }
+}
+)
+
