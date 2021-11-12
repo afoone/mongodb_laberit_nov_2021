@@ -3593,7 +3593,10 @@ db.blog.aggregate(
                     _id: 0, 
                     title: 1, 
                     number_of_comments: 
-                    { $size: '$comments' } }
+                        { 
+                            $size: '$comments' 
+                        } 
+                }
         }
     ]
 )
