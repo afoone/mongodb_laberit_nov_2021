@@ -3,7 +3,7 @@ db.blog.aggregate(
         {
             $project: {
                 _id: 0,
-                title: 1 
+                title:1
             }
         }
     ]
@@ -3526,4 +3526,24 @@ comments.forEach(
             }
         )
     }
+)
+
+db.blog.aggregate(
+    [
+        {
+            $project: {
+                _id: 0,
+                titulo:"$title",
+                comments: {
+                    $filter: {
+                        input: '$comments',
+                        as: "comment",
+                        cond: {
+                                $regexMatch: { input: '$$comment.email', regex: /com/ }
+                        }
+                    }
+                }
+            }
+        }
+    ]
 )
