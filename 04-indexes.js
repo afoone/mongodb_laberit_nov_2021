@@ -82,8 +82,7 @@ db.users.createIndex(
         unique: true, 
         partialFilterExpression: {
             username: {
-                $exists: true
-            }
+                $exists: true            }
         }
     }
 )
