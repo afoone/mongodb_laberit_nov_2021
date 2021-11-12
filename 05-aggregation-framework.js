@@ -3601,4 +3601,92 @@ db.blog.aggregate(
     ]
 )
 
+// stock total
+db.almacen.aggregate(
+    [
+        {
+            $project: {
+                name: 1,
+                stock_total: {
+                    $sum: "$stock.value"
+                }
+            }
+        }
+    ]
+)
 
+// stock medio por almacén
+db.almacen.aggregate(
+    [
+        {
+            $project: {
+                name: 1,
+                stock_medio: {
+                    $avg: "$stock.value",
+                },
+                stock_total: {
+                    $sum: "$stock.value",
+                },
+                stock_maximo: {
+                    $max: "$stock.value",
+                },
+                stock_minimo: {
+                    $min: "$stock.value",
+                }
+            }
+        }
+    ]
+)
+
+
+db.almacen.aggregate(
+    {
+        $group: {
+            _id: {
+                tipo: "$type"
+            },
+            precioMedio: {
+                $avg: "$price"
+            }
+        }
+    }
+)
+
+
+db.almacen.aggregate(
+    {
+        $group: {
+            _id: {
+                tipo: "$type"
+            },
+            precioMedio: {
+                $avg: "$price"
+            },
+            totalProductos: {
+                $sum: 1
+            },
+            precioMaximo: {
+                $max: "$price"
+            },
+            nombres: {
+                $push: "$name"
+            }
+        }
+    }
+)
+
+db.blog.aggregate(
+    [
+        {
+            $unwind: "$comments"
+        }, 
+        {
+            $group: {
+                _id: {
+                    email: "$comments.email"
+                },
+                total_comentarios: {$sum: 1}
+            }
+        }
+    ]
+)
