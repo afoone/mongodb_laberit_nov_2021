@@ -103,8 +103,7 @@ mongos --configdb configRS/127.0.0.1:27001,configRS/127.0.0.1:27002,configRS/127
 Con un sólo config server, sin replica set:
 
 ```bash
-mongos --configdb configRS/localhost:27001 \
-  --bind_ip 127.0.0.1 --logpath /Users/atienda/desarrollo/cursos/mongodb/logs/mongos.log --port 27101
+mongos --configdb configRS/localhost:27001 --bind_ip 127.0.0.1  --port 27101
 ```
 
 Fijémonos que no requiere directorio de datos, no guarda datos, lo hace en los config servers
