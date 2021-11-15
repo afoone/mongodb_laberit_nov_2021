@@ -1,6 +1,6 @@
 # Sharding
 
-Sharding (fragmentación) es el proceso de separar datos entre máquinas. El término particionar es a menudo usado para describir este concepto. Colocar un subconjunto de datos en cada máquina hace posible el almacenar más datos y manejar más carga sin requerir máquinas más grandes y potentes, sólo una cantidad mayor de máquinas menos potentes. La fragmentación puede ser usada asimismo con otros propósitos, incluyendo el colocar los datos más frecuentemente usados en un hardware de mayor rendimiento o separar un datas3et basado en la geografía para localizar un subconjunto de documentos en una colección.
+Sharding (fragmentación) es el proceso de separar datos entre máquinas. El término particionar es a menudo usado para describir este concepto. Colocar un subconjunto de datos en cada máquina hace posible el almacenar más datos y manejar más carga sin requerir máquinas más grandes y potentes, sólo una cantidad mayor de máquinas menos potentes. La fragmentación puede ser usada asimismo con otros propósitos, incluyendo el colocar los datos más frecuentemente usados en un hardware de mayor rendimiento o separar un dataset basado en la geografía para localizar un subconjunto de documentos en una colección.
 
 En cualquier base de datos se puede utilizar la fragmentación de datos, pero es la aplicación la que debe gestionar estos subconjuntos. MongoDB soporta autosharding. 
 
@@ -28,12 +28,18 @@ mkdir -p ./storage-shards/config{1,2,3}
 
 Para iniciar los tres procesos de la réplica:
 
-``shell
+```shell
 mongod --configsvr --replSet configRS --bind_ip 127.0.0.1  --dbpath /Users/atienda/desarrollo/cursos/mongodb/storage-shards/config1 --port 27001
 
 mongod --configsvr --replSet configRS --bind_ip 127.0.0.1  --dbpath /Users/atienda/desarrollo/cursos/mongodb/storage-shards/config2 --port 27002
 
 mongod --configsvr --replSet configRS --bind_ip 127.0.0.1  --dbpath /Users/atienda/desarrollo/cursos/mongodb/storage-shards/config3 --port 27003
+```
+
+Con una sóla réplica:
+
+```shell
+mongod --configsvr --replSet configRS --bind_ip 127.0.0.1  --dbpath /Users/atienda/desarrollo/cursos/mongodb_laberit_nov_2021/storage/config --port 27001
 ```
 
 Luego, una vez iniciados los procesos habrá que conectarse a uno de ellos:
