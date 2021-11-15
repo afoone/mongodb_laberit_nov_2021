@@ -26,7 +26,7 @@ Hay que meterse en el mongoshell y crear la réplica:
 ```javascript
 
 let rsconf = {
-    _id: "afoone",
+    _id: "rsAlfonso",
     members: [
         {
             _id: 0,
@@ -43,15 +43,22 @@ let rsconf = {
     ]
 }
 
-rsconf.initiate(rsconf)
+rs.initiate(rsconf)
 
 ```
 // nos tenemos que conectar al primary
 
-for (i = 0; i <= 1000; i++) {
+for (i = 0; i <= 10000; i++) {
     db.coll.insertOne(
         {
             count: i
         }
     )
 }
+
+rs.add(
+    {
+        host: "localhost:27019",
+        priority: 5
+    }
+)
